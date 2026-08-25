@@ -1,0 +1,15 @@
+# Environnement virtuel
+.venv/
+
+# Caches et fichiers Python generes
+__pycache__/
+*.py[cod]
+
+# Artefacts d'entrainement TensorFlow/Keras
+*.keras
+
+# Configuration locale de VS Code
+.vscode/
+
+# Fichiers macOS
+.DS_Store
