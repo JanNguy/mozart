@@ -27,6 +27,7 @@ typedef struct details_s {
     char *families;
     char *parameter_size;
     char *quatization_level;
+    char **capabilities;
 } details_t;
 
 typedef struct model_s {

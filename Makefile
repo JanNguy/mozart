@@ -4,7 +4,7 @@ CJSON_LIBS := $(shell pkg-config --libs libcjson 2>/dev/null)
 CFLAGS := -Wall -Wextra -Werror -Iincludes $(CJSON_CFLAGS)
 LDFLAGS := $(CJSON_LIBS) -lm -Wl,-rpath,/usr/local/lib
 NAME := mozart
-SRC := main.c src/get_models.c src/get_env.c
+SRC := main.c $(wildcard src/*/*.c)
 OBJ := $(SRC:.c=.o)
 
 .PHONY: all clean fclean re
@@ -18,9 +18,9 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all

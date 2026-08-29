@@ -1,3 +1,4 @@
+import sys
 from collections import defaultdict
 from pathlib import Path
 from random import Random
@@ -5,6 +6,7 @@ from random import Random
 import tensorflow as tf
 from tensorflow import keras
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from ml.donnees import Categorie, X, Y
 
 EPOCHS = 30
