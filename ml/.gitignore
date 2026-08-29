@@ -1,9 +1,3 @@
-# Artefacts de compilation C
-*.o
-*.a
-*.so
-mozart
-
 # Environnement virtuel
 .venv/
 
@@ -19,6 +13,3 @@ __pycache__/
 
 # Fichiers macOS
 .DS_Store
-
-# Secrets
-.env

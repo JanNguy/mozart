@@ -1,16 +1,26 @@
-VERSION	=	v1
-PYTHON	?=	python3.10
-VENV	?=	.venv
-SSL_CERT_FILE	?=	/etc/ssl/cert.pem
+CC := cc
+CJSON_CFLAGS := $(shell pkg-config --cflags libcjson 2>/dev/null)
+CJSON_LIBS := $(shell pkg-config --libs libcjson 2>/dev/null)
+CFLAGS := -Wall -Wextra -Werror -Iincludes $(CJSON_CFLAGS)
+LDFLAGS := $(CJSON_LIBS) -lm -Wl,-rpath,/usr/local/lib
+NAME := mozart
+SRC := main.c src/get_models.c src/get_env.c
+OBJ := $(SRC:.c=.o)
 
-.PHONY: all venv train
+.PHONY: all clean fclean re
 
-all:
+all: $(NAME)
 
-venv:
-	$(PYTHON) -m venv $(VENV)
-	PIP_CERT=$(SSL_CERT_FILE) $(VENV)/bin/python -m pip install --upgrade pip --use-deprecated=legacy-certs
-	PIP_CERT=$(SSL_CERT_FILE) $(VENV)/bin/python -m pip install -r requirements.txt --use-deprecated=legacy-certs
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS)
 
-train:
-	$(VENV)/bin/python model.py
+%.o: %.c includes/mozart.h includes/struct.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all

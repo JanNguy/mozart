@@ -5,7 +5,7 @@ from random import Random
 import tensorflow as tf
 from tensorflow import keras
 
-from donnees import Categorie, X, Y
+from ml.donnees import Categorie, X, Y
 
 EPOCHS = 30
 MODEL_PATH = Path("mozart.keras")
