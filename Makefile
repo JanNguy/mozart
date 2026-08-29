@@ -7,7 +7,7 @@ NAME := mozart
 SRC := main.c $(wildcard src/*/*.c)
 OBJ := $(SRC:.c=.o)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re venv train
 
 all: $(NAME)
 
@@ -24,3 +24,9 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+venv:
+	$(MAKE) -C ml venv
+
+train:
+	$(MAKE) -C ml train
